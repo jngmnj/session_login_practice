@@ -74,9 +74,14 @@ app.get("/", (req, res) => {
 
 // DELETE 요청
 app.delete("/", (req, res) => {
-  req.session.destroy();
-  req.clearCookie("session_id");
-  return res.send("🧹세션 삭제 완료");
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("세션 삭제 실패");
+    }
+    // 세션 삭제 후 쿠키도 삭제
+    res.clearCookie("session_id");
+    return res.send("🧹세션 삭제 완료");
+  });
 });
 
 app.listen(3000, () => console.log("서버 실행 ..."));
