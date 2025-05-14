@@ -43,7 +43,7 @@ function renderUserInfo(userInfo) {
 // 유저 정보를 숨기는 함수
 function renderLoginForm() {
   main.style.display = "none";
-  form.style.display = "block";
+  form.style.display = "grid";
   userName.textContent = "";
   userDetail.textContent = "";
 }
@@ -58,7 +58,7 @@ loginButton.onclick = () => {
 // 로그아웃 버튼을 클릭하는 경우
 logoutButton.onclick = () => {
   logout().then((res) => {
-    console.log(res);
+    console.log(res.data);
     renderLoginForm();
   });
 };
